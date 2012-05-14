@@ -90,7 +90,7 @@ module Ripple
       end
       
       def destroy
-        (destroy!)==false ? false : true
+        destroy!
       rescue Riak::FailedRequest
         false
       end

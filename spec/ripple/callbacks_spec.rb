@@ -19,10 +19,11 @@ describe Ripple::Callbacks do
   subject { doc.new }
   
   it "destroy should return false and not destroy the document when a callback returns false" do
+    # Make double sure, test without before_destroy first
     u = User.create!(:email => 'nobody@domain.com')
-    u.destroy.should_not be true
+    u.destroy.should_not be false
     User.find(u.key).should be nil
-    
+    # Now real test
     User.before_destroy { false }
     u = User.create!(:email => 'nobody@domain.com')
     u.destroy.should be false

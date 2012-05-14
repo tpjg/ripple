@@ -18,6 +18,12 @@ describe Ripple::Callbacks do
 
   subject { doc.new }
 
+  #TG:
+  it "destory should return false when a callback returns false" do
+    doc.before_destroy { false }
+    subject.destroy.should be false
+  end
+  
   it "should add create, update, save, and destroy callback declarations" do
     [:save, :create, :update, :destroy].each do |event|
       doc.private_instance_methods.map(&:to_s).should include("_run_#{event}_callbacks")

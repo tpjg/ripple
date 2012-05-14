@@ -18,8 +18,7 @@ describe Ripple::Callbacks do
 
   subject { doc.new }
 
-  #TG:
-  it "destory should return false when a callback returns false" do
+  it "destroy should return false when a callback returns false" do
     doc.before_destroy { false }
     subject.destroy.should be false
   end

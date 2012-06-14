@@ -11,12 +11,9 @@ module Ripple
 
       def self.to_proc
         @to_proc ||= lambda do |robject|
-          begin
-            possible_model_classes = robject.siblings.map { |s| s.data && s.data['_type'] }.compact.uniq
-            return nil unless possible_model_classes.size == 1
-          rescue
-            return nil
-          end
+          return nil unless s.content_type=='application/json'
+          possible_model_classes = robject.siblings.map { |s| s.data && s.data['_type'] }.compact.uniq
+          return nil unless possible_model_classes.size == 1
 
           resolver = new(robject, possible_model_classes.first.constantize)
           resolver.resolve

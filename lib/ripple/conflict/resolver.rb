@@ -11,7 +11,7 @@ module Ripple
 
       def self.to_proc
         @to_proc ||= lambda do |robject|
-          return nil unless s.content_type=='application/json'
+          return nil unless robject.content_type=='application/json'
           possible_model_classes = robject.siblings.map { |s| s.data && s.data['_type'] }.compact.uniq
           return nil unless possible_model_classes.size == 1
 
